@@ -12,11 +12,12 @@ class Ball{
     float g = random(256);
     float b = random(256);
     c = color(r, g, b);
-    rad = 10;
+    rad = 20;
     x = random((width - rad) + rad/2);
     y = random((height - rad) + rad/2);
     dx = random(10) - 5;
     dy = random(10) - 5;
+    move();
   }
   void move(){
     x += dx;
@@ -24,8 +25,8 @@ class Ball{
     bounce(); //code later
   }
   void bounce(){
-    if(abs(x + dx) >= width ) dx *= -1;
-    if(abs(y + dy) >= height) dy *= -1;
+    if(abs(x + dx) >= width || x + dx < 0) dx *= -1;
+    if(abs(y + dy) >= height || y + dy < 0) dy *= -1;
   }
   
   
