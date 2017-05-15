@@ -1,6 +1,6 @@
 Ball[] BALLS;
 boolean REACTIONSTARTED;
-int EXPAND_OR_CONTRACT;
+int EXPAND_OR_CONTRACT;  // maybe should be attribute of ball 
 
 void setup(){
   size(600, 600);
