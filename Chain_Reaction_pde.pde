@@ -25,4 +25,34 @@ void draw(){
 
 void mouseClicked(){
   REACTIONSTARTED = true;
+  expand();
+  contract();
+}
+
+void expand(){
+  background(245);
+  for (int i=0; i < BALLS.length; i++){
+    color c = BALLS[i].c;
+    BALLS[i].dx = 0;
+    BALLS[i].dy = 0;
+    for(int size = 0; size < 50; size+=5){
+      ellipse(BALLS[i].x, BALLS[i].y, BALLS[i].rad + size, BALLS[i].rad + size);
+      delay(100);
+    }
+    fill(c); 
+    noStroke();
+  }
+}
+void contract(){
+  for (int i=0; i < BALLS.length; i++){
+    color c = BALLS[i].c;
+    BALLS[i].dx = 0;
+    BALLS[i].dy = 0;
+    for(int size = 50; size >= 0; size-=5){
+      ellipse(BALLS[i].x, BALLS[i].y, BALLS[i].rad + size, BALLS[i].rad + size);
+      delay(100);
+    }
+    fill(c); 
+    noStroke();
+  }
 }
