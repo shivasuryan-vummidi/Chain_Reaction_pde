@@ -24,10 +24,11 @@ class Ball{
     y += dy;
     bounce(); //code later
   }
-  void bounce(){
-    if(abs(x + dx) >= width || x + dx < 0) dx *= -1;
-    if(abs(y + dy) >= height || y + dy < 0) dy *= -1;
+  void bounce(){// use radius in eq later 
+    if(x + dx >= width || x + dx < 0) dx *= -1;
+    if(y + dy >= height || y + dy < 0) dy *= -1;
   }
+  
   
   
 }

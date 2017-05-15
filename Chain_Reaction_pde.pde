@@ -1,9 +1,11 @@
 Ball[] BALLS;
 boolean REACTIONSTARTED;
+int EXPAND_OR_CONTRACT;
 
 void setup(){
   size(600, 600);
   REACTIONSTARTED = false;
+  EXPAND_OR_CONTRACT = 1;
   BALLS = new Ball[25];
   for (int i = 0; i < BALLS.length; i++){
     BALLS[i] = new Ball();
@@ -14,45 +16,37 @@ void setup(){
 
 void draw(){
   background(0);
-  for (int i=0; i < BALLS.length; i++){
-    color c = BALLS[i].c;
-    ellipse(BALLS[i].x, BALLS[i].y, BALLS[i].rad, BALLS[i].rad);
-    fill(c); 
-    noStroke();
-    BALLS[i].move();
+    if (REACTIONSTARTED == true){
+      for (int i=0; i < BALLS.length; i++){
+        if (BALLS[i].rad > 100){
+          EXPAND_OR_CONTRACT = -1;
+          System.out.println(BALLS[i].rad);
+          System.out.println(EXPAND_OR_CONTRACT);
+        }
+        else if (BALLS[i].rad < 21){
+          EXPAND_OR_CONTRACT = 1;
+          System.out.println(BALLS[i].rad);
+          System.out.println(EXPAND_OR_CONTRACT);
+        }
+        
+        BALLS[i].rad += EXPAND_OR_CONTRACT;
+        fill(BALLS[i].c);
+        ellipse(BALLS[i].x, BALLS[i].y, BALLS[i].rad, BALLS[i].rad);
+      }
+    }
+  
+  else{
+    for (int i=0; i < BALLS.length; i++){
+      color c = BALLS[i].c;
+      fill(c);
+      ellipse(BALLS[i].x, BALLS[i].y, BALLS[i].rad, BALLS[i].rad);
+      //noStroke(); //why is this necessary?
+      BALLS[i].move();
+    }
   }
 }
+
 
 void mouseClicked(){
-  REACTIONSTARTED = true;
-  expand();
-  contract();
-}
-
-void expand(){
-  background(245);
-  for (int i=0; i < BALLS.length; i++){
-    color c = BALLS[i].c;
-    BALLS[i].dx = 0;
-    BALLS[i].dy = 0;
-    for(int size = 0; size < 50; size+=5){
-      ellipse(BALLS[i].x, BALLS[i].y, BALLS[i].rad + size, BALLS[i].rad + size);
-      delay(100);
-    }
-    fill(c); 
-    noStroke();
-  }
-}
-void contract(){
-  for (int i=0; i < BALLS.length; i++){
-    color c = BALLS[i].c;
-    BALLS[i].dx = 0;
-    BALLS[i].dy = 0;
-    for(int size = 50; size >= 0; size-=5){
-      ellipse(BALLS[i].x, BALLS[i].y, BALLS[i].rad + size, BALLS[i].rad + size);
-      delay(100);
-    }
-    fill(c); 
-    noStroke();
-  }
+  REACTIONSTARTED = !REACTIONSTARTED;
 }
